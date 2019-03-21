@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Table from './Components/Table';
 import './App.css';
 
 class App extends Component {
@@ -33,24 +33,23 @@ class App extends Component {
         ],
     };
 
-  render() {
+
+    componentDidMount(){
+        fetch('test.json').then((response)=>
+        {
+            return response.json();
+        }).then((json)=>{
+            console.log(json);
+        })
+
+    }
+
+
+    render() {
     return (
-      <div className="App">
-        <table>
-            <body>
-            <tr>
-                <td><img src="http://placekitten.com/160/160" /></td>
-                <td>
-                    <h3>Title</h3>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </td>
-                <td>
-                    <a href="#">View</a>
-                </td>
-            </tr>
-            </body>
-        </table>
-      </div>
+        <div className="container">
+            <Table picArray={this.state.picArray}/>
+        </div>
     );
   }
 }
