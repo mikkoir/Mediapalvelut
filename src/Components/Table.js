@@ -11,7 +11,6 @@ class Table extends Component {
                 <td>
                     <td>
                         <img src={item.thumbnails.w160}/>
-
                     </td>
                     <td>
                         <h3>{item.title}</h3>
@@ -20,7 +19,6 @@ class Table extends Component {
                     </td>
                     <td>
                         <a href={item.filename}>View</a>
-
                     </td>
                     <hr/>
                 </td>
