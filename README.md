@@ -1,6 +1,6 @@
 #Linkit tehtäviin
 [First app](http://users.metropolia.fi/~mikkoir/react-project/)
-[http-b](http://users.metropolia.fi/~mikkoir/react-project/HTTP-B/)
+[http-b](http://users.metropolia.fi/~mikkoir/react-project2/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
