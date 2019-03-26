@@ -1,36 +1,37 @@
-import React, { Component } from 'react';
-import Table from './Components/Table';
-import './App.css';
+import React, {Component} from 'react';
+import Table from './Components/table';
 
 class App extends Component {
+
+    apiUrl = 'http://media.mw.metropolia.fi/wbma/media/';
 
     state = {
         picArray: [],
     };
 
-
-    componentDidMount(){
-
-        fetch('test.json').then((response)=>
-        {
+    componentDidMount() {
+        fetch(this.apiUrl).then(response => {
             return response.json();
-        }).then((json)=>{
-            this.setState({picArray: json.data});
+        }).then(json => {
             console.log(json);
-        })
-
-
+            return Promise.all(json.map(pic => {
+                return fetch(this.apiUrl + pic.file_id).then(response => {
+                    return response.json();
+                });
+            })).then(pics => {
+                console.log(pics);
+                this.setState({picArray: pics});
+            });
+        });
     }
 
-
     render() {
-    return (
-        <div className="container">
-            <Table picArray={this.state.picArray}/>
-        </div>
-    );
-  }
+        return (
+            <div className="container">
+                <Table picArray={this.state.picArray}/>
+            </div>
+        );
+    }
 }
-
 
 export default App;
