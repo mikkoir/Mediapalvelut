@@ -8,6 +8,7 @@ import Login from './views/Login';
 import Profile from './views/Profile';
 import Logout from './views/Logout';
 import Grid from "@material-ui/core/Grid/Grid";
+import Upload from "./views/Upload";
 
 class App extends Component {
 
@@ -45,11 +46,15 @@ class App extends Component {
         return this.state.user !== null;
     };
 
-    componentDidMount() {
+    getMedia = () => {
         getAllMedia().then((pics) => {
             console.log(pics);
             this.setState({picArray: pics});
         });
+    };
+
+    componentDidMount() {
+        this.getMedia();
     }
 
     render() {
@@ -57,28 +62,33 @@ class App extends Component {
             <Router basename='/~mikkoir/react-project3'>
                 <div className='container'>
                     <Grid container spacing={24}>
-                    <Grid item xs={3} sm={3}>
-                    <Nav checkLogin={this.checkLogin}/>
-                    </Grid>
-                    <Grid item xs={6}>
-                    <Route  path="/home" render={(props) => (
-                        <Front {...props} picArray={this.state.picArray}/>
-                    )}/>
+                        <Grid item xs={1} sm={1}>
+                            <Nav checkLogin={this.checkLogin}/>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Route path="/home" render={(props) => (
+                                <Front {...props} picArray={this.state.picArray}/>
+                            )}/>
 
-                    <Route path="/single/:id" component={Single}/>
+                            <Route path="/single/:id" component={Single}/>
 
-                    <Route path="/profile" render={(props) => (
-                        <Profile {...props} user={this.state.user}/>
-                    )}/>
+                            <Route path="/upload" render={(props) => (
+                                <Upload {...props} getMediar={this.getMedia()}/>
+                            )}/>
 
-                    <Route exact path="/" render={(props) => (
-                        <Login {...props} setUser={this.setUser}/>
-                    )}/>
 
-                        <Route path="/logout" render={(props) => (
-                            <Logout {...props} setUserLogout={this.setUserLogout}/>
-                        )}/>
-                    </Grid>
+                            <Route path="/profile" render={(props) => (
+                                <Profile {...props} user={this.state.user}/>
+                            )}/>
+
+                            <Route exact path="/" render={(props) => (
+                                <Login {...props} setUser={this.setUser}/>
+                            )}/>
+
+                            <Route path="/logout" render={(props) => (
+                                <Logout {...props} setUserLogout={this.setUserLogout}/>
+                            )}/>
+                        </Grid>
                     </Grid>
                 </div>
             </Router>
@@ -87,3 +97,5 @@ class App extends Component {
 }
 
 export default App;
+
+
